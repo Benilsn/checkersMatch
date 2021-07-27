@@ -4,6 +4,7 @@ public class UI {
 
 
 	Board board = new Board();
+	Piece piece = new Piece();
 	
 	
 	public void initialBoard() {
@@ -24,9 +25,11 @@ public class UI {
 	}
 	
 	
-	public void showBoard() {	
+	public void showBoard() {
+		System.out.println("\n-- BINARY CHECKERS --");
 		for (int r = 0; r < board.getBoard().length;r++) {
 			System.out.println();
+			System.out.print((r + 1) +"   ");
 			for (int c = 0; c < board.getBoard().length; c++) {
 				if (board.getBoard()[r][c] == null) {
 					System.out.print("- ");
@@ -36,17 +39,67 @@ public class UI {
 			
 			}
 		}
+		System.out.println("\n");
+		System.out.println("    A B C D E F G H");
+		
+		System.out.println("\n    CAPTURED PIECES: \n   BLACK(0)    WHITE(1)\n     [0]         [0]");
+		System.out.print("\nCurrent Turn: ");
 	}
 	
 	
 	public void placePiece(int row, int column, String color) {
 		board.getBoard()[row][column] = new Piece(Color.valueOf(color),new Position(row, column));
 	}
-	
-	public void removePiece(int row, int column) {
-		board.getBoard()[row][column] = null;
+
+	public void movePiece(int[] source, int[] target, int currentTurn) throws CheckersException {
+		String turn = "";
+		try {
+			if (currentTurn % 2 != 0) {
+				turn = "WHITE";
+			}
+			if (currentTurn % 2 == 0) {
+				turn = "BLACK";	
+			}
+			
+			if (board.getBoard()[source[1]][source[0]] == null) {
+				throw new CheckersException("invalid position");
+			}
+			
+			if (board.getBoard()[source[1]][source[0]].getType() == "WHITE" && turn.equals("WHITE")) {
+				board.getBoard()[source[1]][source[0]] = null;
+				placePiece(target[1], target[0], "WHITE");
+			}
+			if (board.getBoard()[source[1]][source[0]].getType() == "WHITE" && turn.equals("BLACK")){
+				throw new CheckersException("this piece isnt yours!");
+			}
+			
+			if (board.getBoard()[source[1]][source[0]].getType() == "BLACK" && turn.equals("BLACK")) {
+				board.getBoard()[source[1]][source[0]] = null;
+				placePiece(target[1], target[0], "BLACK");
+			}
+			if (board.getBoard()[source[1]][source[0]].getType() == "BLACK" && turn.equals("WHITE")){
+				throw new CheckersException("this piece isnt yours!");
+			}
+		}
+		catch(Exception e) {
+			throw new CheckersException(e.getMessage());
+		}
+		
+		
+		
 	}
 	
+	
+
+	public String currentTurn(int n) {
+		if (n % 2 != 0) {
+			return "WHITE";
+			
+		}else if (n % 2 == 0) {
+			return "BLACK";	
+		}
+		return null;
+	}
 	
 	
 	

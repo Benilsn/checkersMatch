@@ -7,7 +7,9 @@ public class Piece {
 	private String type;
 	
 	private Position position;
+	private Piece[][] board;
 	
+	public Piece() {}
 	
 	public Piece(Color color, Position position) {
 		this.color = color;
@@ -39,6 +41,12 @@ public class Piece {
 	public Position getPosition() {
 		return position;
 	}
+	
+	public void setPosition(int row, int column, Position position) {
+		this.position = position;
+	}
+	
+
 
 
 	
