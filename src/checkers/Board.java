@@ -14,7 +14,6 @@ public class Board {
 		this.board = new Piece[8][8];
 	}
 	
-	
 	public int[] convertPosition(String string) {
 		
 		int[] convertedInput =  new int[2];
@@ -75,56 +74,10 @@ public class Board {
 		}	
 	return convertedInput;
 	}
-	
-	
-	
-	public int getRow() {
-		return row;
-	}
-
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-
-	public int getColumn() {
-		return column;
-	}
-
-
-	public void setColumn(int column) {
-		this.column = column;
-	}
-
-
-	public Piece getPosition(int row, int column) {
-		return board[row][column];
-	}
-
-
-	public void setPosition(int row, int column, Position position) {
-		this.position = position;
-	}
 
 
 	public Piece[][] getBoard() {
 		return board;
 	}
-	
-	
-	
-
-	
-	
-	
-
-
-	
-	
-	
-	
-	
-	
 
 }

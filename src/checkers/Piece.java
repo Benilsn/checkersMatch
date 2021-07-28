@@ -41,17 +41,7 @@ public class Piece {
 	public Position getPosition() {
 		return position;
 	}
-	
-	public void setPosition(int row, int column, Position position) {
-		this.position = position;
-	}
-	
 
-
-
-	
-	
-	
 	
 
 }

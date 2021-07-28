@@ -43,7 +43,6 @@ public class UI {
 		System.out.println("    A B C D E F G H");
 		
 		System.out.println("\n    CAPTURED PIECES: \n   BLACK(0)    WHITE(1)\n     [0]         [0]");
-		System.out.print("\nCurrent Turn: ");
 	}
 	
 	
@@ -62,35 +61,34 @@ public class UI {
 			}
 			
 			if (board.getBoard()[source[1]][source[0]] == null) {
-				throw new CheckersException("invalid position");
+				throw new CheckersException("Invalid position");
 			}
 			
-			if (board.getBoard()[source[1]][source[0]].getType() == "WHITE" && turn.equals("WHITE")) {
-				board.getBoard()[source[1]][source[0]] = null;
-				placePiece(target[1], target[0], "WHITE");
-			}
-			if (board.getBoard()[source[1]][source[0]].getType() == "WHITE" && turn.equals("BLACK")){
-				throw new CheckersException("this piece isnt yours!");
+			if (board.getBoard()[source[1]][source[0]].getType().equals("1 ")) {
+				if (turn.equals("WHITE")) {
+					board.getBoard()[source[1]][source[0]] = null;
+					placePiece(target[1], target[0], "WHITE");
+				}if (turn.equals("BLACK")) {
+					throw new CheckersException("This piece isnt yours!");
+				}
 			}
 			
-			if (board.getBoard()[source[1]][source[0]].getType() == "BLACK" && turn.equals("BLACK")) {
+			if (board.getBoard()[source[1]][source[0]].getType().equals("0 ")) {			
+				if (turn.equals("BLACK")) {
 				board.getBoard()[source[1]][source[0]] = null;
 				placePiece(target[1], target[0], "BLACK");
+				}else if (turn.equals("WHITE")) {
+					throw new CheckersException("This piece isnt yours!");
+				}
 			}
-			if (board.getBoard()[source[1]][source[0]].getType() == "BLACK" && turn.equals("WHITE")){
-				throw new CheckersException("this piece isnt yours!");
-			}
+
 		}
 		catch(Exception e) {
 			throw new CheckersException(e.getMessage());
-		}
-		
-		
-		
+		}				
 	}
 	
 	
-
 	public String currentTurn(int n) {
 		if (n % 2 != 0) {
 			return "WHITE";
@@ -100,11 +98,6 @@ public class UI {
 		}
 		return null;
 	}
-	
-	
-	
-	
-	
-	
+		
 	
 }
