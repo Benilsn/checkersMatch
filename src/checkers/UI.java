@@ -55,28 +55,43 @@ public class UI {
 		try {
 			if (currentTurn % 2 != 0) {
 				turn = "WHITE";
-			}
-			if (currentTurn % 2 == 0) {
+			}else if (currentTurn % 2 == 0) {
 				turn = "BLACK";	
 			}
-			
+
 			if (board.getBoard()[source[1]][source[0]] == null) {
 				throw new CheckersException("Invalid position");
-			}
-			
-			if (board.getBoard()[source[1]][source[0]].getType().equals("1 ")) {
+			}else if (board.getBoard()[source[1]][source[0]].getType().equals("1 ")) {
 				if (turn.equals("WHITE")) {
-					board.getBoard()[source[1]][source[0]] = null;
-					placePiece(target[1], target[0], "WHITE");
-				}if (turn.equals("BLACK")) {
+					if (currentTurn == 1 && source[1] == 5) {
+						if (target[1] < source[1]-2) {
+							throw new CheckersException("Invalid position");	
+						}else{
+							board.getBoard()[source[1]][source[0]] = null;
+							placePiece(target[1], target[0], "WHITE");
+						}
+					}else if(currentTurn > 1) {
+						if (target[0] > source[0]+1 && target[1] <source[1]+1 && target[1] > source[1]+2) {
+							throw new CheckersException("invalid position");
+						}else {
+							board.getBoard()[source[1]][source[0]] = null;
+							placePiece(target[1], target[0], "WHITE");	
+						}
+					}
+
+				}else if (turn.equals("BLACK")) {
 					throw new CheckersException("This piece isnt yours!");
 				}
-			}
-			
-			if (board.getBoard()[source[1]][source[0]].getType().equals("0 ")) {			
+			}else if (board.getBoard()[source[1]][source[0]].getType().equals("0 ")) {			
 				if (turn.equals("BLACK")) {
-				board.getBoard()[source[1]][source[0]] = null;
-				placePiece(target[1], target[0], "BLACK");
+					if (currentTurn == 2 && source[1] == 3) {
+						if (target[1] > source[1]+2) {
+							throw new CheckersException("Invalid position");	
+						}else{
+							board.getBoard()[source[1]][source[0]] = null;
+							placePiece(target[1], target[0], "BLACK");
+						}
+					}
 				}else if (turn.equals("WHITE")) {
 					throw new CheckersException("This piece isnt yours!");
 				}
@@ -85,10 +100,10 @@ public class UI {
 		}
 		catch(Exception e) {
 			throw new CheckersException(e.getMessage());
+			
 		}				
 	}
-	
-	
+
 	public String currentTurn(int n) {
 		if (n % 2 != 0) {
 			return "WHITE";
