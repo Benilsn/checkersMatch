@@ -84,11 +84,13 @@ public class UI {
 						}else {
 							if (board.getBoard()[target[1]][target[0]].getColor() == Color.WHITE) {
 								throw new CheckersException("Ocuppied position!");
-							}else if(board.getBoard()[target[1]][target[0]].getColor() == Color.BLACK) {
+							} 
+							if(board.getBoard()[target[1]][target[0]].getColor() == Color.BLACK) {
 								board.getBoard()[source[1]][source[0]] = null;
 								placePiece(target[1], target[0], "WHITE");
 								capturedPieces[1] += 1;
-							}else {
+							}
+							if(board.getBoard()[target[1]][target[0]] == null){
 								board.getBoard()[source[1]][source[0]] = null;
 								placePiece(target[1], target[0], "WHITE");
 							}
@@ -114,11 +116,13 @@ public class UI {
 						}else {
 							if (board.getBoard()[target[1]][target[0]].getColor() == Color.BLACK) {
 								throw new CheckersException("Ocuppied position!");
-							}else if(board.getBoard()[target[1]][target[0]].getColor() == Color.WHITE) {
+							}
+							if(board.getBoard()[target[1]][target[0]].getColor() == Color.WHITE) {
 								board.getBoard()[source[1]][source[0]] = null;
 								placePiece(target[1], target[0], "BLACK");
 								capturedPieces[0] += 1;
-							}else {
+							}
+							if (board.getBoard()[target[1]][target[0]] == null){
 								board.getBoard()[source[1]][source[0]] = null;
 								placePiece(target[1], target[0], "BLACK");
 						}
