@@ -3,10 +3,7 @@ package checkers;
 
 public class Board {
 	
-	private int row;
-	private int column;
-	
-	private Position position;
+
 	protected Piece[][] board;
 	
 	public Board() {

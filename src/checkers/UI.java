@@ -63,15 +63,15 @@ public class UI {
 				throw new CheckersException("Invalid position");
 			}else if (board.getBoard()[source[1]][source[0]].getType().equals("1 ")) {
 				if (turn.equals("WHITE")) {
-					if (currentTurn == 1 && source[1] == 5) {
-						if (target[1] < source[1]-2 || target[1] > source[1] || target[0] < source[0] || target[0] > source[0] && target[0] != source[0] ) {
+					if (currentTurn == 1 && source[1] == 5 || source[1] == 6) {
+						if (target[1] < source[1]-2 || target[1] >= source[1] || target[0] < source[0] || target[0] > source[0] || target[0] != source[0]) {
 							throw new CheckersException("Invalid position");	
 						}else{
 							board.getBoard()[source[1]][source[0]] = null;
 							placePiece(target[1], target[0], "WHITE");
 						}
 					}else if(currentTurn > 1) {
-						if (target[1] > source[1]+1 || target[1] > source[1] ||target[1] == source[1] || target[0] > source[0] +1 || target[0] < source[0] -1) {
+						if (target[1] < source[1]-1 || target[1] >= source[1] || target[0] > source[0] +1 || target[0] < source[0] -1) {
 							throw new CheckersException("invalid position");
 						}else {
 							board.getBoard()[source[1]][source[0]] = null;
@@ -84,15 +84,15 @@ public class UI {
 				}
 			}else if (board.getBoard()[source[1]][source[0]].getType().equals("0 ")) {			
 				if (turn.equals("BLACK")) {
-					if (currentTurn == 2 && source[1] == 2) {
-						if ( target[1] > source[1]+1 || target[1] < source[1] || target[1] == source[1] || target[1] > source[1]+1 || target[1] < source[1]-1 && target[0] != source[0]) {
+					if (currentTurn == 2 && source[1] == 2 || source[1] == 1) {
+						if ( target[1] > source[1]+2 || target[1] <= source[1] || target[1] < source[1]-1 || target[0] != source[0]) {
 							throw new CheckersException("Invalid position");	
 						}else{
 							board.getBoard()[source[1]][source[0]] = null;
 							placePiece(target[1], target[0], "BLACK");
 						}
 					}else if(currentTurn > 1) {
-						if (target[1] < source[1]-1 ||target[1] > source[1]+1|| target[1] < source[1] ||target[1] == source[1] || target[0] < source[0] -1 || target[0] > source[0] +1) {
+						if (target[1] < source[1]-1 ||target[1] > source[1]+1|| target[1] <= source[1] || target[0] < source[0] -1 || target[0] > source[0] +1) {
 							throw new CheckersException("invalid position");
 						}else {
 							board.getBoard()[source[1]][source[0]] = null;
