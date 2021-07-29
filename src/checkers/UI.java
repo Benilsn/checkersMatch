@@ -1,10 +1,18 @@
 package checkers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UI {
 
 
 	Board board = new Board();
 	Piece piece = new Piece();
+	
+	int[] capturedPieces = {0, 0};
+	
+	
+	
 	
 	
 	public void initialBoard() {
@@ -42,7 +50,7 @@ public class UI {
 		System.out.println("\n");
 		System.out.println("    A B C D E F G H");
 		
-		System.out.println("\n    CAPTURED PIECES: \n   BLACK(0)    WHITE(1)\n     [0]         [0]");
+		System.out.println("\n    CAPTURED PIECES: \n   BLACK()    WHITE(1)\n     ["+capturedPieces[0]+"]         ["+capturedPieces[1]+"]");
 	}
 	
 	
@@ -74,8 +82,17 @@ public class UI {
 						if (target[1] < source[1]-1 || target[1] >= source[1] || target[0] > source[0] +1 || target[0] < source[0] -1) {
 							throw new CheckersException("invalid position");
 						}else {
-							board.getBoard()[source[1]][source[0]] = null;
-							placePiece(target[1], target[0], "WHITE");	
+							if (board.getBoard()[target[1]][target[0]].getColor() == Color.WHITE) {
+								throw new CheckersException("Ocuppied position!");
+							}else if(board.getBoard()[target[1]][target[0]].getColor() == Color.BLACK) {
+								board.getBoard()[source[1]][source[0]] = null;
+								placePiece(target[1], target[0], "WHITE");
+								capturedPieces[1] += 1;
+							}else {
+								board.getBoard()[source[1]][source[0]] = null;
+								placePiece(target[1], target[0], "WHITE");
+							}
+
 						}
 					}
 
@@ -95,12 +112,20 @@ public class UI {
 						if (target[1] < source[1]-1 ||target[1] > source[1]+1|| target[1] <= source[1] || target[0] < source[0] -1 || target[0] > source[0] +1) {
 							throw new CheckersException("invalid position");
 						}else {
-							board.getBoard()[source[1]][source[0]] = null;
-							placePiece(target[1], target[0], "BLACK");	
+							if (board.getBoard()[target[1]][target[0]].getColor() == Color.BLACK) {
+								throw new CheckersException("Ocuppied position!");
+							}else if(board.getBoard()[target[1]][target[0]].getColor() == Color.WHITE) {
+								board.getBoard()[source[1]][source[0]] = null;
+								placePiece(target[1], target[0], "BLACK");
+								capturedPieces[0] += 1;
+							}else {
+								board.getBoard()[source[1]][source[0]] = null;
+								placePiece(target[1], target[0], "BLACK");
+						}
 						}
 					}
 				}else if (turn.equals("WHITE")) {
-					throw new CheckersException("This piece isnt yours!");
+					throw new CheckersException("This piece isn't yours!");
 				}
 			}
 
@@ -109,6 +134,10 @@ public class UI {
 			throw new CheckersException(e.getMessage());
 			
 		}				
+	}
+	
+	public void capturedPieces() {
+		
 	}
 
 	public String currentTurn(int n) {
