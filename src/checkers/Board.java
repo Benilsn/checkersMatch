@@ -1,6 +1,5 @@
 package checkers;
 
-import java.util.Scanner;
 
 public class Board {
 	

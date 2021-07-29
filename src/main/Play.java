@@ -17,25 +17,7 @@ public class Play {
 		UI ui = new UI();
 		ui.initialBoard();
 		int n = 0;	
-		
-		
-		
-//		int test[][] = new int [8][8];
-		
-//		for (int i = 0; i <test.length; i++) {
-//			System.out.print(i+" ");
-//			for (int j = 0; j < test.length; j++) {
-//				System.out.print(test[i][j]+" ");
-//			}
-//			System.out.println();
-//		}
-//		System.out.println("  0 1 2 3 4 5 6 7");
-		
-		
-		
-		
-		
-		
+
 		
 		while (true) {
 			try {
